@@ -22,28 +22,22 @@ C++Builder + VCL + GLScene. Генерация 100 000 точек или сфе�
 
 ![Сферы в конусе](images/Cone-Spheres-Outside.png)
 
-## Сборка
+## FPS
 
-Нужны RAD Studio с C++Builder для Win32 и [GLXEngine (GLScene)](https://github.com/glscene/GLXEngine).
-Использована версия GLXEngine `aecc61b20c570f2daaa94e886576e9e5333d85a4`.
+Таблица №2. FPS навигатора TGLSimpleNavigation (GLSimpleNavigator).
 
-1. Собрать `Packages/GLScene_RT.dproj` с заголовками и библиотеками C++.
-2. Открыть `RandomStars_cpp.cbproj`, выбрать Release / Win32.
-3. Указать `GLSCENE_ROOT` (корень GLXEngine) и `WINSDK_ROOT` (подготовленные заголовки Windows SDK).
-   Папки `GLXEngine` и `WindowsSDK/37.0` рядом с папкой проекта определяются автоматически.
-4. Собрать и запустить; `GLScene_RT.bpl` и runtime-пакеты RAD Studio должны быть доступны приложению.
+Замер: 100 000 объектов, 5 секунд прогрева и 10 секунд измерения;
+свечение приостановлено. Область вывода — 920 × 721 пиксель, VSync выключен.
 
-Также можно запустить `build.cmd` из RAD Studio Command Prompt.
-
-## Проверка генератора
-
-Ядро генератора не зависит от GLScene. Для проверки нужен компилятор C++11 и CMake:
-
-```sh
-cmake -S . -B build
-cmake --build build
-ctest --test-dir build --output-on-failure
-```
+| Контейнер | Объекты | Камера снаружи | Камера в центре |
+| --- | --- | ---: | ---: |
+| Куб | Точки | 1173,4 | 1193,8 |
+| Куб | Сферы | 5,9 | 6,2 |
+| Сфера | Точки | 1216,8 | 1237,0 |
+| Сфера | Сферы | 5,8 | 5,9 |
+| Цилиндр | Точки | 1337,3 | 1354,2 |
+| Цилиндр | Сферы | 6,2 | 6,6 |
+| Конус | Точки | 1353,9 | 1335,9 |
+| Конус | Сферы | 6,1 | 6,0 |
 
 Примеры для изучения: [AstrobloQ](https://github.com/glscene/AstrobloQ).
-Библиотека GLScene устанавливается отдельно.
