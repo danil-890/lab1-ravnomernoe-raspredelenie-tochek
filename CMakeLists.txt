@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.16)
+project(RandomStarsCore LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_executable(check_cloud tests/check_cloud.cpp source/PointCloud.cpp)
+enable_testing()
+add_test(NAME point_cloud COMMAND check_cloud)

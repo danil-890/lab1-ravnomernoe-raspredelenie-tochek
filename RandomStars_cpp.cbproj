@@ -1,0 +1,92 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{B47E2151-70F1-49E6-A808-708D3DB3D193}</ProjectGuid>
+    <ProjectVersion>20.4</ProjectVersion>
+    <FrameworkType>VCL</FrameworkType>
+    <AppType>Application</AppType>
+    <MainSource>RandomStars_cpp.cpp</MainSource>
+    <Base>True</Base>
+    <Config Condition="'$(Config)'==''">Release</Config>
+    <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    <TargetedPlatforms>1</TargetedPlatforms>
+    <ProjectName>RandomStars_cpp</ProjectName>
+    <GLSCENE_ROOT Condition="'$(GLSCENE_ROOT)'=='' and Exists('$(MSBuildProjectDirectory)\..\GLXEngine')">$(MSBuildProjectDirectory)\..\GLXEngine</GLSCENE_ROOT>
+    <GLSCENE_ROOT Condition="'$(GLSCENE_ROOT)'==''">$(MSBuildProjectDirectory)\..\..\..\GLXEngine</GLSCENE_ROOT>
+    <WINSDK_ROOT Condition="'$(WINSDK_ROOT)'=='' and Exists('$(MSBuildProjectDirectory)\..\WindowsSDK\37.0\windows.h')">$(MSBuildProjectDirectory)\..\WindowsSDK\37.0</WINSDK_ROOT>
+    <WINSDK_ROOT Condition="'$(WINSDK_ROOT)'=='' and Exists('$(MSBuildProjectDirectory)\..\..\..\WindowsSDK\37.0\windows.h')">$(MSBuildProjectDirectory)\..\..\..\WindowsSDK\37.0</WINSDK_ROOT>
+    <WINSDK_ROOT Condition="'$(WINSDK_ROOT)'==''">$(BDS)\include\windows\sdk</WINSDK_ROOT>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+    <Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+    <Base_Win32>true</Base_Win32><CfgParent>Base</CfgParent><Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+    <Cfg_1>true</Cfg_1><CfgParent>Base</CfgParent><Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+    <Cfg_1_Win32>true</Cfg_1_Win32><CfgParent>Cfg_1</CfgParent><Cfg_1>true</Cfg_1><Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+    <Cfg_2>true</Cfg_2><CfgParent>Base</CfgParent><Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+    <Cfg_2_Win32>true</Cfg_2_Win32><CfgParent>Cfg_2</CfgParent><Cfg_2>true</Cfg_2><Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Base)'!=''">
+    <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+    <ProjectType>CppVCLApplication</ProjectType>
+    <DynamicRTL>true</DynamicRTL>
+    <UsePackages>true</UsePackages>
+    <PackageImports>rtl;vcl;vclx;VclSmp;vclimg;GLScene_RT;$(PackageImports)</PackageImports>
+    <LinkPackageImports>rtl.bpi;vcl.bpi;vclx.bpi;VclSmp.bpi;vclimg.bpi;xmlrtl.bpi;GLScene_RT.bpi</LinkPackageImports>
+    <AllPackageLibs>rtl.lib;vcl.lib;vclx.lib;VclSmp.lib;vclimg.lib;GLScene_RT.lib</AllPackageLibs>
+    <Multithreaded>true</Multithreaded>
+    <_TCHARMapping>wchar_t</_TCHARMapping>
+    <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
+    <BCC_UnicodeSupport>true</BCC_UnicodeSupport>
+    <IncludePath>source;$(WINSDK_ROOT);$(GLSCENE_ROOT)\include\Win32;$(GLSCENE_ROOT)\include;..\..\..\WindowsSDK\37.0;..\..\..\GLXEngine\include\Win32;$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
+    <ILINK_LibraryPath>$(GLSCENE_ROOT)\lib\Win32;$(GLSCENE_ROOT)\lib;..\..\..\GLXEngine\lib\Win32;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+    <IntermediateOutputDir>build\$(Platform)\$(Config)</IntermediateOutputDir>
+    <FinalOutputDir>bin\$(Platform)\$(Config)</FinalOutputDir>
+    <DCC_Namespace>System;Vcl;Winapi;$(DCC_Namespace)</DCC_Namespace>
+    <SanitizedProjectName>RandomStars_cpp</SanitizedProjectName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Base_Win32)'!=''">
+    <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Cfg_1)'!=''">
+    <BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+    <BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+    <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+    <Defines>_DEBUG;$(Defines)</Defines>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Cfg_2)'!=''">
+    <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+    <BCC_DebugLineNumbers>false</BCC_DebugLineNumbers>
+    <ILINK_FullDebugInfo>false</ILINK_FullDebugInfo>
+    <Defines>NDEBUG;$(Defines)</Defines>
+  </PropertyGroup>
+  <ItemGroup>
+    <CppCompile Include="RandomStars_cpp.cpp"><BuildOrder>0</BuildOrder></CppCompile>
+    <CppCompile Include="source\MainForm.cpp"><BuildOrder>1</BuildOrder></CppCompile>
+    <CppCompile Include="source\PointCloud.cpp"><BuildOrder>2</BuildOrder></CppCompile>
+    <HppCompile Include="source\MainForm.h"/>
+    <HppCompile Include="source\PointCloud.h"/>
+    <BuildConfiguration Include="Debug"><Key>Cfg_1</Key><CfgParent>Base</CfgParent></BuildConfiguration>
+    <BuildConfiguration Include="Release"><Key>Cfg_2</Key><CfgParent>Base</CfgParent></BuildConfiguration>
+    <BuildConfiguration Include="Base"><Key>Base</Key></BuildConfiguration>
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+    <Borland.ProjectType>CppVCLApplication</Borland.ProjectType>
+    <BorlandProject><CPlusPlusBuilder.Personality>
+      <Source><Source Name="MainSource">RandomStars_cpp.cpp</Source></Source>
+    </CPlusPlusBuilder.Personality>
+    <Platforms><Platform value="Win32">True</Platform></Platforms>
+    </BorlandProject>
+    <ProjectFileVersion>12</ProjectFileVersion>
+  </ProjectExtensions>
+  <Import Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
+</Project>
